@@ -16,6 +16,7 @@ public:
 	uintptr_t addrRangeSize = 0x3FFFFFFFFFFF;
 
 	uintptr_t m_addr = NULL;
+	uintptr_t m_offset = 0;
 
 	BYTE * dataToPatch;
 	BYTE * originalBytes;
@@ -38,10 +39,10 @@ public:
 		PRINTFUNCHEADER();
 
 		originalBytes = (BYTE *)malloc(size);
-		ReadProcessMemory(processHandle, (LPCVOID)m_addr, (LPVOID)originalBytes, size, nullptr);
+		ReadProcessMemory(processHandle, (LPCVOID)(m_addr+m_offset), (LPVOID)originalBytes, size, nullptr);
 
 		size_t cb = 0;
-		WriteProcessMemory(processHandle, (LPVOID)m_addr, dataToPatch, size, &cb);
+		WriteProcessMemory(processHandle, (LPVOID)(m_addr + m_offset), dataToPatch, size, &cb);
 		if (cb == size)
 			isPatched = true;
 
@@ -54,7 +55,7 @@ public:
 		PRINTFUNCHEADER();
 
 		size_t cb;
-		WriteProcessMemory(processHandle, (LPVOID)m_addr, (LPCVOID)originalBytes, size, &cb);
+		WriteProcessMemory(processHandle, (LPVOID)(m_addr + m_offset), (LPCVOID)originalBytes, size, &cb);
 		if (cb == size) {
 			free(originalBytes);
 			isPatched = false;
