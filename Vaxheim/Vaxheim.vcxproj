@@ -157,6 +157,7 @@
     <ClInclude Include="Helper.h" />
     <ClInclude Include="AoB.h" />
     <ClInclude Include="Patch.h" />
+    <ClInclude Include="PatchList.h" />
     <ClInclude Include="resource1.h" />
   </ItemGroup>
   <ItemGroup>

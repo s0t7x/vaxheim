@@ -27,6 +27,9 @@
     <ClInclude Include="AoB.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="PatchList.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Vaxheim.rc">

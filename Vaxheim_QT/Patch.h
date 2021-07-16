@@ -1,7 +1,8 @@
 #pragma once
+#include <iostream>
 #include <Windows.h>
 #include <string>
-#include "AoB.h"
+#include "ArrayOfBytes.h"
 
 #define PRINTFUNCHEADER() { std::string t; t = __FUNCDNAME__; std::cout << name << "::" << t.substr(0,t.find("@@")) << "..."; }
 
@@ -26,20 +27,20 @@ public:
 
 	bool isPatched = false;
 
-	void scan() {
+	inline void scan() {
 		PRINTFUNCHEADER();
 		uintptr_t result = aobScan(processHandle, signaturePattern, signatureMask, (char*)addrRangeStart, addrRangeSize);
 		if (result) m_addr = result;
 		std::cout << result << std::endl;
 	}
 
-	void patch() {
+	inline void patch() {
 		if (!m_addr || isPatched) return;
 
 		PRINTFUNCHEADER();
 
 		originalBytes = (BYTE *)malloc(size);
-		ReadProcessMemory(processHandle, (LPCVOID)(m_addr+m_offset), (LPVOID)originalBytes, size, nullptr);
+		ReadProcessMemory(processHandle, (LPCVOID)(m_addr + m_offset), (LPVOID)originalBytes, size, nullptr);
 
 		size_t cb = 0;
 		WriteProcessMemory(processHandle, (LPVOID)(m_addr + m_offset), dataToPatch, size, &cb);
@@ -49,8 +50,8 @@ public:
 		std::cout << (isPatched ? "PATCHED" : "FAILED") << std::endl;
 	}
 
-	void unpatch() {
-		if (!m_addr ||!isPatched) return;
+	inline void unpatch() {
+		if (!m_addr || !isPatched) return;
 
 		PRINTFUNCHEADER();
 
@@ -63,20 +64,20 @@ public:
 		std::cout << (isPatched ? "FAILED" : "UNPATCHED") << std::endl;
 	};
 
-	void scanAndPatch() {
-		if(!m_addr) scan();
+	inline void scanAndPatch() {
+		if (!m_addr) scan();
 		patch();
 	}
 
-	void toggle() {
+	inline void toggle() {
 		if (isPatched)
 			unpatch();
 		else
-			scanAndPatch();
+			patch();//scanAndPatch();
 		std::cout << name << "::" << (isPatched ? "ACTIVATED" : "DEACTIVATED") << std::endl;
 	}
 
-	Patch(HANDLE processHandle, const char * signaturePattern, const char * signatureMask, BYTE * data, size_t size, std::string name = "", uintptr_t offset = 0x0) {
+	inline Patch(HANDLE processHandle, const char * signaturePattern, const char * signatureMask, BYTE * data, size_t size, std::string name = "", uintptr_t offset = 0x0) {
 		this->processHandle = processHandle;
 		this->signaturePattern = signaturePattern;
 		this->signatureMask = signatureMask;
@@ -84,10 +85,10 @@ public:
 		this->size = size;
 		if (name.length() > 1) this->name = name;
 		this->m_offset = offset;
-		scan();
+		//scan();
 	}
 
-	~Patch() {
+	inline ~Patch() {
 		if (m_addr && isPatched)
 			unpatch();
 	}

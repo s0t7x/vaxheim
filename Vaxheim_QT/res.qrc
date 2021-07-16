@@ -1,0 +1,12 @@
+<RCC>
+  <qresource prefix="assets">
+    <file>BraidLineHorisontalMedium.png</file>
+    <file>button_checked.png</file>
+    <file>button_small.png</file>
+    <file>button_small_disabled.png</file>
+    <file>mapicon_checked.png</file>
+    <file>panel_bkg_128.png</file>
+    <file>woodpanel_container.png</file>
+    <file>logo.png</file>
+  </qresource>
+</RCC>

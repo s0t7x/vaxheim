@@ -218,17 +218,6 @@ int main() {
 			}
 			if (GetAsyncKeyState(VK_NUMPAD6) & 0x1) {
 				AttackGetLevelDamageFactor->toggle();
-				//if (!AttackGetLevelDamageFactor->isPatched) {
-				//	if (!AttackGetLevelDamageFactor->m_addr) {
-				//		AttackGetLevelDamageFactor->scan();
-				//		// float at +0x70
-				//		AttackGetLevelDamageFactor->m_addr = AttackGetLevelDamageFactor->m_addr ? AttackGetLevelDamageFactor->m_addr + 0x70 : 0;
-				//	}
-				//	AttackGetLevelDamageFactor->patch();
-				//}
-				//else {
-				//	AttackGetLevelDamageFactor->unpatch();
-				//}
 			}
 			if (GetAsyncKeyState(VK_NUMPAD7) & 0x1) {
 				InventoryIsTeleportable->toggle();
