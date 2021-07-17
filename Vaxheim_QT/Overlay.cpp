@@ -26,6 +26,7 @@ Overlay::Overlay(PatchList * pPatchList)
 				else found++;
 			}
 			if (!patchList->PlayerHaveRequirementsSub->m_addr) patchList->PlayerHaveRequirementsSub->scan();
+			if (!patchList->InventoryGuiIsVisible->m_addr) patchList->InventoryGuiIsVisible->scan();
 		}
 	});
 	scanThread->start();
@@ -66,8 +67,8 @@ Overlay::Overlay(PatchList * pPatchList)
 	checkBoxList.push_back(ui.cbMonsterAIIsSleeping);
 	checkBoxList.push_back(ui.cbInventoryMoveInventoryToGrave);
 	checkBoxList.push_back(ui.cbInventoryAddItem);
-
-	connect(ui.exitButton, &QPushButton::pressed, this, [&]()->void { hide(); exit(1); });
+		
+	connect(ui.exitButton, &QPushButton::pressed, this, [&]()->void { toggle(); });
 
 	// 1. Set the cursor map
 	QPixmap cursor_pix = QPixmap("./assets/cursor.png");
@@ -104,19 +105,22 @@ void Overlay::validatePatches()
 	}
 }
 
+void Overlay::toggle() {
+	if (isHidden()) {
+		updateCheckboxes();
+		patchList->InventoryGuiIsVisible->patch();
+		show();
+	}
+	else {
+		hide();
+		patchList->InventoryGuiIsVisible->unpatch();
+	}
+}
+
 void Overlay::handleAsyncKeyInput()
 {
 	if (GetAsyncKeyState(VK_DELETE) & 0x1) {
-		if (isHidden()) {
-			updateCheckboxes();
-			patchList->InventoryGuiIsVisible->scanAndPatch();
-			if(patchList->InventoryGuiIsVisible->isPatched)
-				show();
-		}
-		else {
-			hide();
-			patchList->InventoryGuiIsVisible->unpatch();
-		}
+		toggle();
 	}
 	//else 
 	//if(GetAsyncKeyState(VK_END) & 0x1) {

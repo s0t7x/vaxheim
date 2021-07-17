@@ -21,6 +21,8 @@ public:
 	void updateCheckboxes();
 	void validatePatches();
 
+	void toggle();
+
 
 protected:
 	void mousePressEvent(QMouseEvent *event);

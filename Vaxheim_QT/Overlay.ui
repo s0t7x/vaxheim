@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>302</width>
-    <height>161</height>
+    <width>356</width>
+    <height>194</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -31,12 +31,12 @@ QCheckBox::indicator:unchecked {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>301</width>
-     <height>161</height>
+     <width>356</width>
+     <height>195</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-image: url(&quot;./assets/woodpanel_container.png&quot;) 0 0 0 0 stretch stretch;</string>
+    <string notr="true">border-image: url(&quot;./assets/woodpanel_container_kawaii.png&quot;) 0 0 0 0 stretch stretch;</string>
    </property>
    <property name="text">
     <string/>
