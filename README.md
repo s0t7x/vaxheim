@@ -9,6 +9,7 @@
 サードパーティソフトウェアのホットパッチの単純な概念実証。教育目的でのみ作成されました。
 ここでは、「Valheim」PCバージョン内の重要なゲームメソッドの動作を変更するために使用されます。アセットには、「IronGate」/「CoffeeStainPublishing」にライセンスされたアートワークが含まれている場合があります。ターゲットソフトウェアの開発者をこの種の攻撃にさらすためのBugReportを作成しました。非推奨の署名を引き続き使用しています。
 
+
 <b>「BUGREPORT」 [valheimbugs.featureupvote.com](https://valheimbugs.featureupvote.com/suggestions/197855/fix-avoid-detect-attack-vectors-mutiplayer-hacks) </b>
 
 simple poc of hotpatching third-party software. Created solely for teaching purposes. 
